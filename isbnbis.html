@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Dejar solo la última versión del script para el navegador -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>CRUD Libros - DIALOGO MODAL HTML</title>
+</head>
+
+<body class="min-h-screen bg-slate-100 text-slate-900 font-sans overflow-x-hidden">
+
+  <header class="sticky top-0 z-50 bg-gradient-to-r from-blue-900 via-purple-900 to-purple-950 shadow-xl">
+    
+    <!-- 1. NAVBAR CON LOS 4 BOTONES DE OPERACIÓN -->
+    <nav class="px-4 py-4 flex flex-col items-center justify-center gap-4">
+      <div class="text-center">
+        <h1 class="text-3xl font-bold text-white">Mantenimiento de Libros</h1>
+        <p class="mt-2 text-blue-100">CRUD con ISBN y dialog modal</p>
+      </div>
+      
+      <!-- Grupo de botones (Guardarán el estado global en JS: 1, 2, 3 o 4) -->
+      <div class="flex w-full flex-wrap items-center justify-center gap-3">
+        <button id="btn-agregar" class="min-w-[130px] rounded-lg bg-yellow-400 px-4 py-2 text-sm font-semibold uppercase text-slate-900 shadow-md transition-colors hover:bg-yellow-300 focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2 focus:ring-offset-purple-950">
+          1. AGREGAR
+        </button>
+        <button id="btn-modificar" class="min-w-[130px] rounded-lg bg-yellow-400 px-4 py-2 text-sm font-semibold uppercase text-slate-900 shadow-md transition-colors hover:bg-yellow-300 focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2 focus:ring-offset-purple-950">
+          2. MODIFICAR
+        </button>
+        <button id="btn-eliminar" class="min-w-[130px] rounded-lg bg-yellow-400 px-4 py-2 text-sm font-semibold uppercase text-slate-900 shadow-md transition-colors hover:bg-yellow-300 focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2 focus:ring-offset-purple-950">
+          3. ELIMINAR
+        </button>
+        <button id="btn-mostrar" class="min-w-[130px] rounded-lg bg-yellow-400 px-4 py-2 text-sm font-semibold uppercase text-slate-900 shadow-md transition-colors hover:bg-yellow-300 focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2 focus:ring-offset-purple-950">
+          4. MOSTRAR
+        </button>
+      </div>
+    </nav>
+  </header>
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="min-h-screen bg-gradient-to-br from-blue-950 via-blue-900 to-purple-950 px-4 py-8">
+    <div class="mx-auto max-w-2xl rounded-2xl bg-white/95 p-5 shadow-xl sm:p-6">
+      
+      <!-- Indicador visual del modo actual (Ayuda mucho al usuario) -->
+      <div class="mb-6 rounded-xl bg-slate-100 p-4 text-center text-sm font-semibold text-slate-700 shadow-inner" id="estado-operacion">
+        Selecciona una operación en el menú superior para comenzar
+      </div>
+
+      <!-- FORMULARIO -->
+      <form id="form-libro" class="space-y-5">
+        
+        <!-- Campo ISBN: Clave primaria (Fuera del fieldset, controlado por JS) -->
+        <div>
+          <label for="isbn" class="mb-1 block text-sm font-bold text-blue-900">ISBN (Código Clave). Ejemplo 978-3-16-148410-0</label>
+          <input type="text" id="isbn" disabled
+                class="w-full rounded-lg border border-slate-300 px-3 py-2 font-mono text-sm shadow-sm transition-shadow focus:border-blue-600 focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-400"
+                placeholder="Ejemplo 978-3-16-148410-0">
+          <p class="mt-1 text-xs text-slate-500">Presiona la tecla Enter o Tab al terminar de escribir para buscar.</p>
+        </div>
+
+        <hr class="my-4 border-slate-200">
+
+        <!-- FIELDSET QUE AGRUPA EL RESTO DE CAMPOS -->
+        <fieldset id="campos-libro" disabled class="space-y-5 group disabled:opacity-60 transition-opacity">
+          
+          <!-- Campo Título (No modificable en la opción 2, lleva data-info) -->
+          <div>
+            <label for="titulo" class="mb-1 block text-sm font-bold text-blue-900">Título del Libro</label>
+            <input type="text" id="titulo" data-info="fijo"
+                  class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm transition-shadow focus:border-blue-600 focus:ring-2 focus:ring-blue-500 disabled:bg-slate-100">
+          </div>
+
+          <!-- Campo Autor (No modificable en la opción 2, lleva data-info) -->
+          <div>
+            <label for="autor" class="mb-1 block text-sm font-bold text-blue-900">Autor</label>
+            <input type="text" id="autor" data-info="fijo"
+                  class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm transition-shadow focus:border-blue-600 focus:ring-2 focus:ring-blue-500 disabled:bg-slate-100">
+          </div>
+
+          <!-- Dos columnas para Stock y Precio -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Campo Stock (SÍ modificable en la opción 2) -->
+            <div>
+              <label for="stock" class="mb-1 block text-sm font-bold text-purple-900">Unidades en Stock</label>
+              <input type="number" id="stock" data-info="modificable"
+                    class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm transition-shadow focus:border-blue-600 focus:ring-2 focus:ring-blue-500 disabled:bg-slate-100">
+            </div>
+
+            <!-- Campo Precio (SÍ modificable en la opción 2) -->
+            <div>
+              <label for="precio" class="mb-1 block text-sm font-bold text-yellow-700">Precio (€)</label>
+              <input type="number" step="0.01" id="precio" data-info="modificable"
+                    class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm transition-shadow focus:border-blue-600 focus:ring-2 focus:ring-blue-500 disabled:bg-slate-100">
+            </div>
+          </div>
+
+        </fieldset>
+
+        <!-- Botones de Acción del Formulario (Aceptar / Cancelar) -->
+        <div id="acciones-formulario" class="hidden flex flex-col justify-end gap-3 border-t border-slate-200 pt-4 sm:flex-row">
+          <button type="button" id="btn-cancelar" class="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100">
+            Cancelar
+          </button>
+          <button type="submit" id="btn-confirmar" class="rounded-lg bg-yellow-400 px-4 py-2 text-sm font-semibold uppercase text-slate-900 shadow-md transition-colors hover:bg-yellow-300">
+            Guardar Cambios
+          </button>
+        </div>
+
+      </form>
+      
+    </div>
+  
+ 
+    <!-- Dialog modal desde HTML con FORM: method="dialog" cierra el modal al enviar. -->
+    <dialog id="dialog-informativo" class="w-[calc(100%-2rem)] max-w-sm rounded-2xl border border-slate-100 bg-white p-6 shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm">
+      <form method="dialog">
+        <div class="mb-3 flex items-center gap-3 text-amber-600">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          <h3 class="text-lg font-bold text-gray-900" id="info-titulo">Aviso del Sistema</h3>
+        </div>
+        <p class="mb-6 text-sm text-gray-600" id="info-mensaje">Mensaje.</p>
+        <div class="flex justify-end">
+          <button type="submit" id="info-btn-aceptar" class="rounded-lg bg-yellow-400 px-4 py-2 text-sm font-semibold uppercase text-slate-900 shadow-md transition-colors hover:bg-yellow-300">Ok</button>
+        </div>
+      </form>
+    </dialog>
+
+
+  </main>
+
+  <script src="./js/clase-libro.js"></script>
+  <script src="./js/libros.js"></script>
+  <script src="./js/mainbis.js"></script>
+</body>
+</html>

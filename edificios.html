@@ -1,0 +1,134 @@
+<!doctype html>
+<!-- Indica que la página está en español. -->
+<html lang="es">
+
+<head>
+    <!-- Configuración básica para caracteres y diseño responsive. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Carga Tailwind CSS para usar clases de diseño directamente en el HTML. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>CRUD Edificios - DIALOGO DINAMICO - JS</title>
+</head>
+
+<body class="bg-slate-100 overflow-x-hidden">
+
+    <!-- Cabecera fija con los botones principales del CRUD. -->
+    <header class="sticky top-0 z-50 bg-gradient-to-r from-blue-900 via-purple-900 to-purple-950 shadow-xl">
+
+        <!-- Barra de botones: cada botón se conecta con JavaScript mediante su id. -->
+        <div class="w-full flex flex-wrap items-center justify-center gap-3 px-4 py-4">
+
+            <button id="agregar" type="button"
+                class="min-w-[130px] rounded-lg bg-yellow-400 px-4 py-2 font-semibold uppercase text-slate-900 shadow-md hover:bg-yellow-300">
+                Agregar
+            </button>
+
+            <button id="modificar" type="button"
+                class="min-w-[130px] rounded-lg bg-yellow-400 px-4 py-2 font-semibold uppercase text-slate-900 shadow-md hover:bg-yellow-300">
+                Modificar superficie
+            </button>
+
+            <button id="eliminar" type="button"
+                class="min-w-[130px] rounded-lg bg-yellow-400 px-4 py-2 font-semibold uppercase text-slate-900 shadow-md hover:bg-yellow-300">
+                Eliminar
+            </button>
+
+            <button id="mostrar" type="button"
+                class="min-w-[130px] rounded-lg bg-yellow-400 px-4 py-2 font-semibold uppercase text-slate-900 shadow-md hover:bg-yellow-300">
+                Mostrar / Devolver
+            </button>
+
+            <button id="listar" type="button"
+                class="min-w-[130px] rounded-lg bg-yellow-400 px-4 py-2 font-semibold uppercase text-slate-900 shadow-md hover:bg-yellow-300">
+                Listar edificios
+            </button>
+
+            <button id="costeTotal" type="button"
+                class="min-w-[130px] rounded-lg bg-yellow-400 px-4 py-2 font-semibold uppercase text-slate-900 shadow-md hover:bg-yellow-300">
+                Coste mensual total
+            </button>
+
+        </div>
+
+
+        <div class="px-6 pb-6 text-center">
+            <h1 class="text-3xl font-bold text-white">
+                Gestión de limpieza de edificios
+            </h1>
+            <p class="mt-2 text-blue-100">
+                Empresa de Servicios Varios
+            </p>
+        </div>
+
+    </header>
+
+    <!-- Contenido principal de la aplicación. -->
+    <main class="min-h-screen bg-gradient-to-br from-blue-950 via-blue-900 to-purple-950 px-4 py-8">
+
+        
+        <section class="mx-auto max-w-6xl grid gap-6 lg:grid-cols-[280px_1fr]">
+
+            <aside class="rounded-2xl bg-white/10 p-5 shadow-xl">
+                <h2 class="mb-4 text-xl font-bold text-white">
+                    Edificios gestionados
+                </h2>
+
+                <ol id="listaEdificios" class="space-y-3 text-sm text-blue-100">
+                </ol>
+            </aside>
+
+            <!-- Panel donde se muestran los datos del edificio seleccionado. -->
+            <section class="rounded-2xl bg-white/95 p-6 shadow-xl">
+
+                <!-- Estos textos cambian desde app.js según el edificio elegido. -->
+                <h2 id="nombreEdificio" class="text-2xl font-bold text-slate-900">
+                    Selecciona un edificio
+                </h2>
+
+                <p id="datosEdificio" class="mt-3 text-slate-700">
+                    Aquí se mostrarán los datos del edificio.
+                </p>
+
+                <!-- Tarjetas resumen: plantas, superficie y coste mensual. -->
+                <div class="mt-6 grid gap-4 md:grid-cols-3">
+
+                    <article class="rounded-xl bg-blue-50 p-4 shadow">
+                        <h3 class="font-bold text-blue-900">Plantas</h3>
+                        <p id="plantasEdificio" class="text-2xl font-bold text-slate-900">0</p>
+                    </article>
+
+                    <article class="rounded-xl bg-purple-50 p-4 shadow">
+                        <h3 class="font-bold text-purple-900">Superficie</h3>
+                        <p id="superficieEdificio" class="text-2xl font-bold text-slate-900">0 m²</p>
+                    </article>
+
+                    <article class="rounded-xl bg-yellow-50 p-4 shadow">
+                        <h3 class="font-bold text-yellow-700">Coste mensual</h3>
+                        <p id="costeEdificio" class="text-2xl font-bold text-slate-900">0 €</p>
+                    </article>
+
+                </div>
+
+                <!-- Resultado calculado con los métodos limpiar() y costeMensual(). -->
+                <div class="mt-6 rounded-xl bg-slate-100 p-4">
+                    <h3 class="font-bold text-slate-900">Resultado limpieza</h3>
+                    <p id="resultadoLimpieza" class="mt-2 text-slate-700">
+                        El resultado del método limpiar() aparecerá aquí.
+                    </p>
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+    <!-- Primero se carga la clase Edificio y después la lógica de la aplicación. -->
+    <script src="./js/edificios.js"></script>
+    <script src="./js/app.js"></script>
+
+</body>
+
+</html>
