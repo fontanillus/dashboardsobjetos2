@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./img/checklist.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Lista de Compras</title>
+</head>
+
+<body class="min-h-screen overflow-x-hidden bg-gradient-to-br from-blue-950 via-blue-900 to-purple-950 font-sans text-slate-900">
+
+  <header class="sticky top-0 z-50 bg-gradient-to-r from-blue-900 via-purple-900 to-purple-950 shadow-xl">
+    <nav class="flex flex-col items-center justify-center gap-3 px-4 py-5 text-center">
+        <h1 class="text-3xl font-bold text-white">
+          Lista de Compras
+        </h1>
+        <p class="text-blue-100">
+          Agrega productos al carrito y consulta cuántos productos llevas guardados y el importe total de tu compra.
+        </p>
+    </nav>
+  </header>
+
+  <main class="min-h-screen bg-gradient-to-br from-blue-950 via-blue-900 to-purple-950 px-4 py-8">
+    <section class="mx-auto w-full max-w-6xl">
+      <div class="flex flex-col gap-6">
+        <div class="grid gap-5 lg:grid-cols-[1.4fr_0.9fr]">
+          <section class="rounded-2xl border border-purple-200/25 bg-purple-950/35 p-4 text-white shadow-xl backdrop-blur sm:p-5">
+            <h2 class="mb-5 text-xl font-bold text-white sm:text-2xl">
+              Agregar producto
+            </h2>
+
+            <div class="flex flex-col gap-3">
+              <label class="text-sm font-bold uppercase text-yellow-300" for="producto-input">
+                Producto que deseas agregar
+              </label>
+
+              <div class="grid gap-3 sm:grid-cols-[1fr_130px_180px_auto] sm:items-center">
+                <input id="producto-input" type="text" placeholder="Ejemplo: Pan"
+                  class="w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-base text-slate-900 shadow-sm outline-none placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-500">
+
+                <input id="cantidad-input" type="number" min="1" step="1" placeholder="Cantidad"
+                  class="w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-base text-slate-900 shadow-sm outline-none placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-500">
+
+                <input id="precio-input" type="number" min="0" step="0.01" placeholder="Precio (EUR)"
+                  class="w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-base text-slate-900 shadow-sm outline-none placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-500">
+
+                <button id="btnAgregar" type="button"
+                  class="w-full rounded-lg bg-yellow-400 px-4 py-2 text-center text-sm font-semibold uppercase text-slate-900 shadow-md transition-colors hover:bg-yellow-300 focus:ring-2 focus:ring-yellow-200 sm:w-auto">
+                  Agregar
+                </button>
+              </div>
+
+              <div class="grid gap-3 sm:grid-cols-2">
+                <div class="flex flex-col gap-3">
+                  <input
+                    id="inputPosicion"
+                    type="number"
+                    min="1"
+                    placeholder="Posicion a eliminar"
+                    class="w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-base text-slate-900 shadow-sm outline-none placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-500"
+                  >
+
+                  <button id="btnEliminar" type="button"
+                    class="w-full rounded-lg bg-gradient-to-r from-blue-900 via-purple-900 to-purple-950 px-4 py-2 text-center text-sm font-semibold uppercase text-white shadow-md transition hover:bg-purple-800 focus:ring-2 focus:ring-purple-200">
+                    Eliminar por posicion
+                  </button>
+                </div>
+
+                <button id="btnVaciar" type="button"
+                  class="w-full rounded-lg bg-gradient-to-r from-blue-900 via-purple-900 to-purple-950 px-4 py-2 text-center text-sm font-semibold uppercase text-white shadow-md transition hover:bg-purple-800 focus:ring-2 focus:ring-purple-200">
+                  Vaciar carrito
+                </button>
+
+                <button id="btnTotal" type="button"
+                  class="w-full rounded-lg bg-yellow-400 px-4 py-2 text-center text-sm font-semibold uppercase text-slate-900 shadow-md transition-colors hover:bg-yellow-300 focus:ring-2 focus:ring-yellow-200">
+                  Calcular gasto estimado
+                </button>
+              </div>
+            </div>
+
+            <p id="mensaje" class="mt-5 rounded-xl border border-yellow-200/70 bg-yellow-100 px-3 py-3 text-center text-lg font-bold text-slate-900 shadow">&nbsp;</p>
+          </section>
+
+          <aside class="rounded-2xl border border-purple-200/25 bg-purple-950/35 p-4 text-white shadow-xl backdrop-blur sm:p-5">
+            <h2 class="mb-5 text-xl font-bold text-white sm:text-2xl">
+              Resumen
+            </h2>
+
+            <div class="rounded-2xl border border-purple-100/20 bg-purple-900/35 px-4 py-5 text-center shadow-inner">
+              <div class="mx-auto mb-3 flex justify-center">
+                <svg
+                  class="h-12 w-12 text-yellow-300"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path d="M3 4H5L6.6 14.2C6.72 14.96 7.38 15.5 8.15 15.5H17.7C18.43 15.5 19.07 15.02 19.28 14.32L21 8.5H7.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="9" cy="19" r="1.6" fill="currentColor"/>
+                  <circle cx="18" cy="19" r="1.6" fill="currentColor"/>
+                </svg>
+              </div>
+
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100">
+                Productos en carrito
+              </p>
+              <p id="num-prod" class="mt-2 text-4xl font-extrabold text-white">0</p>
+            </div>
+
+            <a href="index.html"
+              class="mt-4 inline-block w-full rounded-lg bg-gradient-to-r from-blue-900 via-purple-900 to-purple-950 px-4 py-2 text-center text-sm font-semibold uppercase text-white shadow-md transition hover:bg-purple-800">
+              Volver al inicio
+            </a>
+          </aside>
+        </div>
+
+        <section class="rounded-2xl border border-purple-200/25 bg-purple-950/35 p-4 text-white shadow-xl backdrop-blur sm:p-5">
+          <h2 class="mb-5 text-xl font-bold text-white sm:text-2xl">
+            Carrito actual
+          </h2>
+          <ol id="lista-compras" class="list-none space-y-2 text-sm text-blue-100 sm:text-base"></ol>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="./js/lista.js"></script>
+</body>
+
+</html>
