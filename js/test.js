@@ -86,7 +86,6 @@ const btnSiguiente = document.getElementById("siguiente");
 const btnVerificar = document.getElementById("verificar");
 const btnReiniciar = document.getElementById("reiniciar");
 const btnTema = document.getElementById("btnTema");
-const mainTest = document.querySelector("main");
 const modalJustificacion = document.getElementById("modal-justificacion");
 const modalTitulo = document.getElementById("modal-titulo");
 const modalTexto = document.getElementById("modal-texto");
@@ -98,22 +97,10 @@ let testFinalizado = sessionStorage.getItem(CLAVE_FINALIZADO) === "true";
 
 function aplicarTemaGuardado() {
     const tema = localStorage.getItem(CLAVE_TEMA) || "oscuro";
+    const esOscuro = tema === "oscuro";
 
-    if (tema === "claro") {
-        mainTest.classList.remove("bg-gradient-to-br", "from-blue-950", "via-blue-900", "to-purple-950");
-        mainTest.classList.add("bg-slate-100");
-
-        btnTema.classList.remove("bg-yellow-400", "text-slate-900", "hover:bg-yellow-300");
-        btnTema.classList.add("bg-slate-900", "text-white", "hover:bg-slate-800");
-        btnTema.textContent = "Modo oscuro";
-    } else {
-        mainTest.classList.remove("bg-slate-100");
-        mainTest.classList.add("bg-gradient-to-br", "from-blue-950", "via-blue-900", "to-purple-950");
-
-        btnTema.classList.remove("bg-slate-900", "text-white", "hover:bg-slate-800");
-        btnTema.classList.add("bg-yellow-400", "text-slate-900", "hover:bg-yellow-300");
-        btnTema.textContent = "Modo claro";
-    }
+    document.documentElement.classList.toggle("dark", esOscuro);
+    btnTema.textContent = esOscuro ? "Modo claro" : "Modo oscuro";
 }
 
 function cambiarTema() {
@@ -199,13 +186,13 @@ function pintarPregunta() {
 
     formTest.innerHTML = `
         <fieldset>
-            <legend class="mb-5 text-xl font-bold text-blue-950">${pregunta.texto}</legend>
+            <legend class="mb-5 text-xl font-bold text-blue-950 dark:text-blue-100">${pregunta.texto}</legend>
             <div class="space-y-3">
                 ${pregunta.opciones.map((opcion, indice) => `
-                    <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:border-purple-400 hover:bg-purple-50">
+                    <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:border-purple-400 hover:bg-purple-50 dark:border-slate-700 dark:bg-slate-800 dark:hover:border-purple-300 dark:hover:bg-slate-700">
                         <input type="radio" name="respuesta" value="${indice}" class="mt-1 h-4 w-4 accent-purple-800"
                             ${pregunta.opcionSeleccionada === indice ? "checked" : ""}>
-                        <span class="text-sm font-semibold leading-6 text-slate-800">${opcion}</span>
+                        <span class="text-sm font-semibold leading-6 text-slate-800 dark:text-slate-100">${opcion}</span>
                     </label>
                 `).join("")}
             </div>
@@ -280,10 +267,10 @@ function pintarRevisionFinal() {
         const acierto = respuestaAlumno === pregunta.correcta;
 
         return `
-            <section class="rounded-xl border ${acierto ? "border-green-300 bg-green-50" : "border-red-300 bg-red-50"} p-4 shadow-sm">
+            <section class="rounded-xl border ${acierto ? "border-green-300 bg-green-50 dark:border-green-600 dark:bg-green-950" : "border-red-300 bg-red-50 dark:border-red-600 dark:bg-red-950"} p-4 shadow-sm">
                 <div class="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                    <h3 class="text-lg font-bold text-blue-950">Pregunta ${indicePregunta + 1}. ${pregunta.texto}</h3>
-                    <span class="w-fit rounded-full px-3 py-1 text-xs font-bold uppercase ${acierto ? "bg-green-200 text-green-900" : "bg-red-200 text-red-900"}">
+                    <h3 class="text-lg font-bold text-blue-950 dark:text-blue-100">Pregunta ${indicePregunta + 1}. ${pregunta.texto}</h3>
+                    <span class="w-fit rounded-full px-3 py-1 text-xs font-bold uppercase ${acierto ? "bg-green-200 text-green-900 dark:bg-green-300 dark:text-green-950" : "bg-red-200 text-red-900 dark:bg-red-300 dark:text-red-950"}">
                         ${acierto ? "Correcta" : "Incorrecta"}
                     </span>
                 </div>
@@ -292,16 +279,16 @@ function pintarRevisionFinal() {
                     ${pregunta.opciones.map((opcion, indiceOpcion) => {
                         const esCorrecta = indiceOpcion === pregunta.correcta;
                         const esAlumno = indiceOpcion === respuestaAlumno;
-                        let clases = "border-slate-200 bg-white text-slate-800";
+                        let clases = "border-slate-200 bg-white text-slate-800 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100";
                         let etiqueta = "";
 
                         if (esCorrecta) {
-                            clases = "border-green-500 bg-green-100 text-green-950";
+                            clases = "border-green-500 bg-green-100 text-green-950 dark:border-green-400 dark:bg-green-900 dark:text-green-50";
                             etiqueta = "Respuesta correcta";
                         }
 
                         if (esAlumno && !esCorrecta) {
-                            clases = "border-red-500 bg-red-100 text-red-950";
+                            clases = "border-red-500 bg-red-100 text-red-950 dark:border-red-400 dark:bg-red-900 dark:text-red-50";
                             etiqueta = "Respuesta del alumno";
                         }
 
@@ -318,10 +305,10 @@ function pintarRevisionFinal() {
                     }).join("")}
                 </div>
 
-                <p class="mt-3 rounded-lg border border-blue-200 bg-blue-50 p-3 text-sm font-semibold text-blue-950">
+                <p class="mt-3 rounded-lg border border-blue-200 bg-blue-50 p-3 text-sm font-semibold text-blue-950 dark:border-blue-700 dark:bg-blue-950 dark:text-blue-100">
                     Justificación: ${pregunta.justificacion}
                 </p>
-                <p class="mt-2 text-sm font-bold text-slate-700">
+                <p class="mt-2 text-sm font-bold text-slate-700 dark:text-slate-300">
                     Puntos asignados: ${pregunta.puntosAsignados} de ${pregunta.puntos}
                 </p>
             </section>

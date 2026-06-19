@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class"
+        };
+    </script>
     <title>Test de JavaScript</title>
 </head>
 
@@ -14,7 +19,7 @@
     En este test se usa para conservar el array de preguntas, la pregunta actual
     y si el examen ya fue finalizado.
 -->
-<body class="min-h-screen overflow-x-hidden bg-slate-100 font-sans text-slate-900">
+<body class="min-h-screen overflow-x-hidden bg-slate-100 font-sans text-slate-900 dark:bg-blue-950 dark:text-slate-100">
 
     <header class="sticky top-0 z-50 bg-gradient-to-r from-blue-900 via-purple-900 to-purple-950 shadow-xl">
         <nav class="flex flex-col items-center justify-center gap-4 px-4 py-4">
@@ -45,7 +50,7 @@
                 </button>
 
                 <button type="button" id="btnTema"
-                    class="min-w-[150px] rounded-lg bg-yellow-400 px-4 py-2 text-sm font-semibold uppercase text-slate-900 shadow-md transition-colors hover:bg-yellow-300 focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2 focus:ring-offset-purple-950">
+                    class="min-w-[150px] rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold uppercase text-white shadow-md transition-colors hover:bg-slate-800 focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2 focus:ring-offset-purple-950 dark:bg-yellow-400 dark:text-slate-900 dark:hover:bg-yellow-300">
                     Dark / Light
                 </button>
 
@@ -57,47 +62,47 @@
         </nav>
     </header>
 
-    <main class="min-h-screen bg-gradient-to-br from-blue-950 via-blue-900 to-purple-950 px-4 py-8">
+    <main class="min-h-screen bg-slate-100 px-4 py-8 transition-colors dark:bg-gradient-to-br dark:from-blue-950 dark:via-blue-900 dark:to-purple-950">
         <section class="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[300px_1fr]">
 
             <aside class="space-y-6">
-                <section class="rounded-2xl bg-white/95 p-5 shadow-xl">
-                    <h2 class="text-xl font-bold text-blue-950">Progreso</h2>
-                    <p id="contador" class="mt-3 text-sm font-semibold text-slate-700"></p>
+                <section class="rounded-2xl bg-white/95 p-5 shadow-xl dark:bg-slate-900/95">
+                    <h2 class="text-xl font-bold text-blue-950 dark:text-blue-100">Progreso</h2>
+                    <p id="contador" class="mt-3 text-sm font-semibold text-slate-700 dark:text-slate-300"></p>
 
-                    <div class="mt-4 h-3 overflow-hidden rounded-full bg-slate-200">
+                    <div class="mt-4 h-3 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
                         <div id="barra-progreso"
                             class="h-full rounded-full bg-gradient-to-r from-yellow-400 to-purple-700 transition-all">
                         </div>
                     </div>
                 </section>
 
-                <section class="rounded-2xl bg-white/95 p-5 shadow-xl">
-                    <h2 class="text-xl font-bold text-blue-950">Session Storage</h2>
-                    <p class="mt-3 text-sm leading-6 text-slate-700">
+                <section class="rounded-2xl bg-white/95 p-5 shadow-xl dark:bg-slate-900/95">
+                    <h2 class="text-xl font-bold text-blue-950 dark:text-blue-100">Session Storage</h2>
+                    <p class="mt-3 text-sm leading-6 text-slate-700 dark:text-slate-300">
                         El array de preguntas se guarda mientras la pestaña siga abierta.
                     </p>
                 </section>
 
-                <section class="rounded-2xl bg-white/95 p-5 shadow-xl">
-                    <h2 class="text-xl font-bold text-blue-950">Resultado</h2>
-                    <p id="resultado" class="mt-3 rounded-xl bg-yellow-50 p-4 text-center text-lg font-bold text-slate-900 shadow">
+                <section class="rounded-2xl bg-white/95 p-5 shadow-xl dark:bg-slate-900/95">
+                    <h2 class="text-xl font-bold text-blue-950 dark:text-blue-100">Resultado</h2>
+                    <p id="resultado" class="mt-3 rounded-xl bg-yellow-50 p-4 text-center text-lg font-bold text-slate-900 shadow dark:bg-yellow-300">
                         Responde y pulsa Verificar.
                     </p>
                 </section>
             </aside>
 
             <!-- Zona dinámica: test.js pinta aquí la pregunta actual o la revisión final. -->
-            <section class="rounded-2xl bg-white/95 p-5 shadow-xl sm:p-6">
+            <section class="rounded-2xl bg-white/95 p-5 shadow-xl sm:p-6 dark:bg-slate-900/95">
                 <div
-                    class="mb-6 flex flex-col gap-3 border-b border-slate-200 pb-4 sm:flex-row sm:items-end sm:justify-between">
+                    class="mb-6 flex flex-col gap-3 border-b border-slate-200 pb-4 sm:flex-row sm:items-end sm:justify-between dark:border-slate-700">
                     <div>
-                        <h2 id="titulo-pregunta" class="text-2xl font-bold text-slate-900"></h2>
-                        <p class="mt-1 text-sm text-slate-500">Marca solo una opción.</p>
+                        <h2 id="titulo-pregunta" class="text-2xl font-bold text-slate-900 dark:text-slate-100"></h2>
+                        <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Marca solo una opción.</p>
                     </div>
 
                     <span id="estado"
-                        class="w-fit rounded-full bg-purple-100 px-4 py-2 text-xs font-bold uppercase text-purple-900">
+                        class="w-fit rounded-full bg-purple-100 px-4 py-2 text-xs font-bold uppercase text-purple-900 dark:bg-purple-300 dark:text-purple-950">
                     </span>
                 </div>
 
@@ -109,9 +114,9 @@
 
     <!-- Modal de estudio: muestra si la respuesta es correcta y la justificación. -->
     <dialog id="modal-justificacion"
-        class="w-[calc(100%-2rem)] max-w-lg rounded-2xl border border-slate-100 bg-white p-6 text-slate-900 shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm">
-        <h2 id="modal-titulo" class="text-2xl font-bold text-blue-950"></h2>
-        <p id="modal-texto" class="mt-4 text-sm leading-6 text-slate-700"></p>
+        class="w-[calc(100%-2rem)] max-w-lg rounded-2xl border border-slate-100 bg-white p-6 text-slate-900 shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
+        <h2 id="modal-titulo" class="text-2xl font-bold text-blue-950 dark:text-blue-100"></h2>
+        <p id="modal-texto" class="mt-4 text-sm leading-6 text-slate-700 dark:text-slate-300"></p>
         <button type="button" id="cerrar-modal"
             class="mt-6 w-full rounded-lg bg-yellow-400 px-4 py-2 text-sm font-semibold uppercase text-slate-900 shadow-md transition-colors hover:bg-yellow-300">
             Cerrar
