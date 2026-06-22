@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!-- Indica al navegador que este documento usa HTML5. -->
+<html lang="es">
+
+<head>
+    <!-- Configuracion basica: caracteres correctos y adaptacion a moviles. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Cargamos Tailwind CSS para usar clases de estilo directamente en el HTML. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media (max-width: 640px) and (max-height: 760px) {
+            body {
+                overflow: hidden;
+                zoom: 0.82;
+            }
+        }
+
+        @media (min-width: 641px) and (max-height: 900px) {
+            body {
+                overflow: hidden;
+                zoom: 0.9;
+            }
+        }
+    </style>
+    <title>El podio de una carrera - Destructuraci&oacute;n</title>
+</head>
+
+<body class="h-screen overflow-hidden bg-gradient-to-br from-blue-950 via-blue-900 to-purple-950 font-sans text-slate-900">
+
+    <!-- Cabecera principal de la pagina. -->
+    <header class="bg-gradient-to-r from-blue-900 via-purple-900 to-purple-950 shadow-xl">
+        <nav class="flex flex-col items-center justify-center px-2 py-1 text-center sm:px-3 sm:py-2">
+            <h1 class="text-lg font-bold leading-6 text-white sm:text-2xl">
+                El podio de una carrera
+            </h1>
+            <p class="text-[11px] leading-4 text-blue-100 sm:text-sm">
+                Destructuraci&oacute;n de arrays en consola.
+            </p>
+        </nav>
+    </header>
+
+    <!-- Contenido principal: ejercicio, resultado esperado e instrucciones. -->
+    <main class="flex min-h-[calc(100vh-72px)] items-center justify-center px-3 py-4 sm:px-6 sm:py-6">
+        <section class="mx-auto grid w-full max-w-6xl gap-2 lg:grid-cols-[1fr_0.85fr]">
+
+            <!-- Tarjeta del ejercicio: muestra el codigo que se ejecuta desde js/podium.js. -->
+            <section class="rounded-lg border border-purple-200/25 bg-purple-950/35 p-2.5 text-white shadow-xl backdrop-blur sm:p-4">
+                <h2 class="text-lg font-bold leading-6 text-white sm:text-2xl">
+                    Ejercicio
+                </h2>
+
+                <p class="text-xs leading-5 text-blue-100 sm:mt-2 sm:text-base sm:leading-6">
+                    Sacamos el primer, segundo y tercer corredor del array <strong>corredores</strong>.
+                </p>
+
+                <!-- Este bloque es visual: el resultado real aparece en la consola. -->
+                <div class="mt-2 rounded-lg bg-slate-950 p-2 text-[10px] leading-3 shadow-inner sm:mt-4 sm:p-4 sm:text-sm sm:leading-5">
+                    <pre class="overflow-x-auto text-blue-100"><code>const corredores = ["Ana", "Luis", "Mar&iacute;a", "Pedro", "Sof&iacute;a"];
+
+const [oro, plata, bronce] = corredores;
+
+console.log(oro, plata, bronce);</code></pre>
+                </div>
+
+                <!-- Resultado esperado al abrir la consola del navegador. -->
+                <div class="mt-2 rounded-lg border border-yellow-200/60 bg-yellow-100 p-2 text-slate-900 shadow sm:mt-4 sm:p-4">
+                    <h3 class="text-xs font-bold leading-4 text-slate-950 sm:text-base">
+                        Resultado esperado en consola
+                    </h3>
+                    <p class="font-mono text-sm font-bold leading-5 sm:mt-1 sm:text-lg">
+                        Ana Luis Mar&iacute;a
+                    </p>
+                </div>
+
+                <!-- Notas visibles para estudiar la destructuracion de arrays. -->
+                <div class="mt-2 rounded-lg border border-blue-100/30 bg-white/10 p-2 text-blue-100 shadow sm:mt-4 sm:p-4">
+                    <h3 class="text-xs font-bold leading-4 text-white sm:text-base">
+                        Notas explicativas
+                    </h3>
+
+                    <ul class="mt-1 grid grid-cols-2 gap-x-3 gap-y-1 text-[10px] leading-3 sm:mt-2 sm:text-sm sm:leading-5">
+                        <li><strong>corredores</strong>: array.</li>
+                        <li><strong>[ ]</strong>: destructuraci&oacute;n de array.</li>
+                        <li><strong>oro</strong>: primer valor, Ana.</li>
+                        <li><strong>plata</strong>: segundo valor, Luis.</li>
+                        <li><strong>bronce</strong>: tercer valor, Mar&iacute;a.</li>
+                        <li>Pedro y Sof&iacute;a no se guardan.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Instrucciones compactas para comprobar el console.log. -->
+            <aside class="rounded-lg border border-purple-200/25 bg-white/95 p-2.5 shadow-xl sm:p-4">
+                <h2 class="text-lg font-bold leading-6 text-blue-950 sm:text-2xl">
+                    C&oacute;mo verlo
+                </h2>
+
+                <ol class="mt-2 grid grid-cols-3 gap-2 text-slate-700 sm:mt-4">
+                    <li class="rounded-lg bg-blue-50 p-1.5 shadow sm:p-3">
+                        <strong class="text-xs leading-4 text-blue-950 sm:text-base">1. Abre</strong>
+                        <p class="text-[10px] leading-3 sm:mt-1 sm:text-sm">Se carga el JS.</p>
+                    </li>
+
+                    <li class="rounded-lg bg-purple-50 p-1.5 shadow sm:p-3">
+                        <strong class="text-xs leading-4 text-purple-950 sm:text-base">2. Consola</strong>
+                        <p class="text-[10px] leading-3 sm:mt-1 sm:text-sm">F12 o Ctrl + Shift + J.</p>
+                    </li>
+
+                    <li class="rounded-lg bg-yellow-50 p-1.5 shadow sm:p-3">
+                        <strong class="text-xs leading-4 text-yellow-700 sm:text-base">3. Resultado</strong>
+                        <p class="text-[10px] leading-3 sm:mt-1 sm:text-sm">Ana Luis Mar&iacute;a.</p>
+                    </li>
+                </ol>
+
+                <!-- Mini podio visual para relacionar posiciones con variables. -->
+                <div class="mt-2 grid grid-cols-3 items-end gap-2 text-center sm:mt-4">
+                    <article class="rounded-lg bg-slate-100 p-1.5 shadow sm:p-3">
+                        <p class="text-[10px] font-bold uppercase text-slate-500 sm:text-sm">Plata</p>
+                        <p class="text-xs font-bold text-slate-900 sm:text-base">Luis</p>
+                    </article>
+
+                    <article class="rounded-lg bg-yellow-100 p-1.5 shadow sm:p-3">
+                        <p class="text-[10px] font-bold uppercase text-yellow-700 sm:text-sm">Oro</p>
+                        <p class="text-xs font-bold text-slate-900 sm:text-base">Ana</p>
+                    </article>
+
+                    <article class="rounded-lg bg-orange-100 p-1.5 shadow sm:p-3">
+                        <p class="text-[10px] font-bold uppercase text-orange-700 sm:text-sm">Bronce</p>
+                        <p class="text-xs font-bold text-slate-900 sm:text-base">Mar&iacute;a</p>
+                    </article>
+                </div>
+
+                <!-- Recordatorio teorico breve. -->
+                <div class="mt-2 rounded-lg bg-slate-100 p-1.5 sm:mt-4 sm:p-3">
+                    <h3 class="text-xs font-bold leading-4 text-slate-900 sm:text-base">
+                        Nota
+                    </h3>
+                    <p class="text-[10px] leading-3 text-slate-700 sm:mt-1 sm:text-sm sm:leading-6">
+                        En arrays importa la posici&oacute;n. Por eso usamos corchetes <strong>[ ]</strong>, no llaves
+                        <strong>{ }</strong>.
+                    </p>
+                </div>
+
+                <a href="index.html"
+                    class="mt-2 inline-block w-full rounded-lg bg-gradient-to-r from-blue-900 via-purple-900 to-purple-950 px-3 py-1 text-center text-[10px] font-semibold uppercase text-white shadow-md transition hover:bg-purple-800 sm:mt-4 sm:px-4 sm:py-2 sm:text-sm">
+                    Volver al inicio
+                </a>
+            </aside>
+
+        </section>
+    </main>
+
+    <!-- Importante: cargamos el JavaScript al final para que el navegador ejecute el console.log. -->
+    <script src="./js/podium.js"></script>
+</body>
+
+</html>
