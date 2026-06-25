@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>API Pokemon</title>
+</head>
+
+<body class="min-h-screen overflow-x-hidden bg-gradient-to-br from-blue-950 via-blue-900 to-purple-950 font-sans text-slate-900">
+  <header class="sticky top-0 z-50 bg-gradient-to-r from-blue-900 via-purple-900 to-purple-950 shadow-xl">
+    <nav class="flex flex-col items-center justify-center gap-3 px-4 py-4 text-center lg:flex-row lg:justify-between lg:px-8">
+      <div>
+        <h1 class="text-2xl font-bold text-white sm:text-3xl">
+          PokeAPI
+        </h1>
+        <p class="text-sm text-blue-100">
+          Consulta la lista y revisa los datos principales de cada Pokemon.
+        </p>
+      </div>
+
+      <a href="index.html"
+        class="min-w-[112px] rounded-lg border border-yellow-100/70 px-3 py-2 text-center text-xs font-semibold uppercase text-yellow-100 shadow-md transition-colors hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2 focus:ring-offset-purple-950">
+        Volver
+      </a>
+    </nav>
+  </header>
+
+  <main class="bg-gradient-to-br from-blue-950 via-blue-900 to-purple-950 px-4 py-6">
+    <section id="wrapper" class="mx-auto grid w-full max-w-6xl gap-5 lg:grid-cols-[260px_1fr]">
+      <aside id="lista"
+        class="flex max-h-[calc(100vh-170px)] min-h-[320px] flex-col overflow-hidden rounded-2xl border border-purple-200/25 bg-purple-950/35 text-white shadow-xl backdrop-blur">
+        <h3 id="enc-lista" class="border-b border-white/10 px-4 py-3 text-center text-xl font-bold text-white">
+          Pokemons
+        </h3>
+
+        <div id="lista-pokemons" class="min-h-0 flex-1 overflow-y-auto px-3 py-3 text-sm">
+          <a class="block rounded-lg px-3 py-2 text-blue-100 transition-colors hover:bg-white/10 hover:text-yellow-300">01. hello</a>
+        </div>
+
+        <nav class="flex shrink-0 items-center justify-between gap-3 border-t border-white/10 px-4 py-3">
+          <button
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-400 text-xl font-bold leading-none text-slate-900 shadow-md transition-colors hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2 focus:ring-offset-purple-950"
+            type="button" id="anterior" title="anterior">
+            &larr;
+          </button>
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100">mas</p>
+          <button
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-400 text-xl font-bold leading-none text-slate-900 shadow-md transition-colors hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2 focus:ring-offset-purple-950"
+            type="button" id="siguiente" title="siguiente">
+            &rarr;
+          </button>
+        </nav>
+      </aside>
+
+      <main id="pokemon" class="rounded-2xl border border-purple-200/25 bg-white/95 p-4 shadow-xl sm:p-5">
+        <div class="mb-4 flex flex-col gap-2 border-b border-slate-200 pb-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-purple-900">Detalle</p>
+            <h2 class="text-2xl font-bold text-slate-900">
+              Datos del Pokemon
+            </h2>
+          </div>
+
+          <span class="w-fit rounded-full bg-purple-100 px-3 py-2 text-xs font-bold uppercase text-purple-900">
+            PokeAPI
+          </span>
+        </div>
+
+        <div id="estado-inicial"
+          class="flex min-h-[420px] items-center justify-center rounded-2xl border border-dashed border-purple-200 bg-blue-50/70 p-6 text-center text-sm text-slate-600 shadow-inner">
+          <p class="font-semibold text-blue-950">Selecciona un Pokemon de la lista.</p>
+        </div>
+
+        <div id="detalle-pokemon" class="hidden"></div>
+      </main>
+    </section>
+  </main>
+
+  <script src="./js/pockemon.js"></script>
+</body>
+
+</html>

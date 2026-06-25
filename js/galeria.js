@@ -1,4 +1,4 @@
-// 1. VARIABLES
+﻿// 1. VARIABLES
 let autoplay = false;
 let temporizadorId = null;
 let currentIndex = 0;
@@ -37,7 +37,7 @@ const setAutoplayState = (isPlaying) => {
 		}
 
 		temporizadorId = temporizador(() => {
-			// Solo avanza si aún hay imágenes disponibles.
+			// Solo avanza si aÃºn hay imÃ¡genes disponibles.
 			if (images.length > 0) {
 				currentIndex = (currentIndex + 1) % images.length;
 				renderImage(currentIndex);
@@ -74,7 +74,7 @@ const renderImage = (index) => {
 		document.getElementById('totalImages').textContent = images.length;
 	} else {
 		document.getElementById('mainImage').src = '';
-		document.getElementById('imageTitle').textContent = 'Sin imágenes';
+		document.getElementById('imageTitle').textContent = 'Sin imÃ¡genes';
 		document.getElementById('imageDesc').textContent = '';
 		document.getElementById('caracteristicasList').innerHTML = '';
 		document.getElementById('currentIndex').textContent = '0';
@@ -85,14 +85,14 @@ const renderImage = (index) => {
 const renderSidebarList = () => {
 	const sidebarList = document.getElementById('sidebarList');
 	if (!sidebarList) {
-		console.warn('No se encontró el elemento sidebarList');
+		console.warn('No se encontrÃ³ el elemento sidebarList');
 	} else {
-		// Reconstruye la lista para reflejar selección y cambios CRUD.
+		// Reconstruye la lista para reflejar selecciÃ³n y cambios CRUD.
 		sidebarList.innerHTML = '';
 
 		if (!Array.isArray(images) || images.length === 0) {
 			const li = document.createElement('li');
-			li.textContent = 'No hay imágenes.';
+			li.textContent = 'No hay imÃ¡genes.';
 			sidebarList.appendChild(li);
 		} else {
 			images.forEach((img, idx) => {
@@ -120,7 +120,7 @@ const renderSidebarList = () => {
 					renderImage(currentIndex);
 					renderSidebarList();
 
-					// En móvil se cierra el menú tras seleccionar una imagen.
+					// En mÃ³vil se cierra el menÃº tras seleccionar una imagen.
 					if (window.innerWidth < 1024) {
 						const sidebarMenu = document.getElementById('sidebarMenu');
 						if (sidebarMenu) {
@@ -137,7 +137,7 @@ const renderSidebarList = () => {
 
 const refrescarGaleria = (nuevoIndice) => {
 	if (images.length > 0) {
-		// Conserva el índice válido tras navegar o editar elementos.
+		// Conserva el Ã­ndice vÃ¡lido tras navegar o editar elementos.
 		if (typeof nuevoIndice === 'number' && nuevoIndice >= 0 && nuevoIndice < images.length) {
 			currentIndex = nuevoIndice;
 		} else {
@@ -153,7 +153,7 @@ const refrescarGaleria = (nuevoIndice) => {
 
 // 4. BUSCAR
 const MENSAJE_NOMBRE_FOTO =
-	'Introduce el nombre de la foto (como aparece en el menú lateral):';
+	'Introduce el nombre de la foto (como aparece en el menÃº lateral):';
 
 const buscarFotoPorNombre = (titulo) => {
 	let encontrado = false;
@@ -161,7 +161,7 @@ const buscarFotoPorNombre = (titulo) => {
 	let i = 0;
 	const elementos = images.length;
 
-	// Devuelve -1 por estándar cuando no encuentra coincidencia.
+	// Devuelve -1 por estÃ¡ndar cuando no encuentra coincidencia.
 	while (i < elementos && !encontrado) {
 		if (titulo.toLowerCase() === images[i].title.toLowerCase()) {
 			indice = i;
@@ -175,14 +175,14 @@ const buscarFotoPorNombre = (titulo) => {
 
 // 5. CRUD CON DIALOG
 // CREATE, READ, UPDATE y DELETE usando <dialog>
-// Antes usábamos prompt(), alert() y confirm().
-// Ahora toda la interacción se realiza dentro de la página.
+// Antes usÃ¡bamos prompt(), alert() y confirm().
+// Ahora toda la interacciÃ³n se realiza dentro de la pÃ¡gina.
 
 // CREATE
-// Agrega una nueva foto a la galería.
+// Agrega una nueva foto a la galerÃ­a.
 function agregarFoto() {
 
-	// Abrimos el formulario vacío.
+	// Abrimos el formulario vacÃ­o.
 	abrirFormularioFoto('Agregar nueva foto', null, (nuevaFoto) => {
 
 		// Primero buscamos para evitar duplicados.
@@ -220,7 +220,7 @@ function mostrarFoto() {
 
 	abrirBuscarDialogo('Mostrar / devolver foto', (tituloBuscado) => {
 
-		// Buscamos la foto por su título.
+		// Buscamos la foto por su tÃ­tulo.
 		const indice = buscarFotoPorNombre(tituloBuscado);
 
 		// Si existe, la mostramos.
@@ -233,7 +233,7 @@ function mostrarFoto() {
 		} else {
 
 			// Si no existe, mostramos mensaje.
-			abrirMensajeDialogo('No se puede mostrar: esta foto no está disponible.');
+			abrirMensajeDialogo('No se puede mostrar: esta foto no estÃ¡ disponible.');
 		}
 	});
 }
@@ -255,7 +255,7 @@ function modificarFoto() {
 
 			abrirFormularioFoto('Modificar foto', fotoActual, (fotoModificada) => {
 
-				// Comprobamos que el nuevo título no esté repetido.
+				// Comprobamos que el nuevo tÃ­tulo no estÃ© repetido.
 				const indiceNuevoTitulo = buscarFotoPorNombre(fotoModificada.title);
 
 				if (indiceNuevoTitulo === -1 || indiceNuevoTitulo === indice) {
@@ -266,7 +266,7 @@ function modificarFoto() {
 					fotoActual.descripcion = fotoModificada.descripcion;
 					fotoActual.caracteristicas = fotoModificada.caracteristicas;
 
-					// Refrescamos la galería.
+					// Refrescamos la galerÃ­a.
 					refrescarGaleria(indice);
 
 					abrirMensajeDialogo('Foto modificada correctamente.');
@@ -274,21 +274,21 @@ function modificarFoto() {
 				} else {
 
 					// Ya existe otra foto con ese nombre.
-					abrirMensajeDialogo('No se puede modificar: ya hay otra foto con ese título.');
+					abrirMensajeDialogo('No se puede modificar: ya hay otra foto con ese tÃ­tulo.');
 				}
 			});
 
 		} else {
 
 			// No encontramos la foto.
-			abrirMensajeDialogo('No se puede modificar: esta foto no está disponible.');
+			abrirMensajeDialogo('No se puede modificar: esta foto no estÃ¡ disponible.');
 		}
 	});
 }
 
 
 // DELETE
-// Elimina una foto de la galería.
+// Elimina una foto de la galerÃ­a.
 function eliminarFoto() {
 
 	abrirBuscarDialogo('Eliminar foto', (tituloBuscado) => {
@@ -296,19 +296,19 @@ function eliminarFoto() {
 		// Primero buscamos la foto.
 		const indice = buscarFotoPorNombre(tituloBuscado);
 
-		// Si existe, pedimos confirmación.
+		// Si existe, pedimos confirmaciÃ³n.
 		if (indice !== -1) {
 
 			abrirConfirmacionDialogo(
 
-				`¿Seguro que quieres eliminar "${images[indice].title}"?`,
+				`Â¿Seguro que quieres eliminar "${images[indice].title}"?`,
 
 				() => {
 
 					// Eliminamos la foto del array.
 					images.splice(indice, 1);
 
-					// Actualizamos la galería.
+					// Actualizamos la galerÃ­a.
 					refrescarGaleria(indice);
 
 					abrirMensajeDialogo('Foto eliminada correctamente.');
@@ -318,12 +318,12 @@ function eliminarFoto() {
 		} else {
 
 			// No existe la foto.
-			abrirMensajeDialogo('No se puede eliminar: esta foto no está disponible.');
+			abrirMensajeDialogo('No se puede eliminar: esta foto no estÃ¡ disponible.');
 		}
 	});
 }
 // 5. CRUD CON DIALOG
-// Ventanas de diálogo para no usar prompt(), alert() ni confirm().
+// Ventanas de diÃ¡logo para no usar prompt(), alert() ni confirm().
 
 // Mensaje simple tipo alert()
 const abrirMensajeDialogo = (mensaje) => {
@@ -348,7 +348,7 @@ const abrirMensajeDialogo = (mensaje) => {
 };
 
 
-// Confirmación tipo confirm()
+// ConfirmaciÃ³n tipo confirm()
 const abrirConfirmacionDialogo = (mensaje, callbackAceptar) => {
 	const dialog = document.createElement('dialog');
 
@@ -357,7 +357,7 @@ const abrirConfirmacionDialogo = (mensaje, callbackAceptar) => {
 			<p>${mensaje}</p>
 
 			<div class="mt-4 flex gap-2">
-				<button id="aceptarDialogo" class="px-4 py-2 bg-red-600 text-white rounded">Sí</button>
+				<button id="aceptarDialogo" class="px-4 py-2 bg-red-600 text-white rounded">SÃ­</button>
 				<button id="cancelarDialogo" class="px-4 py-2 bg-gray-400 text-white rounded">No</button>
 			</div>
 		</div>
@@ -392,10 +392,10 @@ const abrirFormularioFoto = (tituloDialogo, fotoActual, callbackAceptar) => {
 		<form id="formDialogoFoto" class="p-4 text-black space-y-3">
 			<h2 class="font-bold text-lg">${tituloDialogo}</h2>
 
-			<input id="dialogTitulo" class="border p-2 w-full" placeholder="Título" value="${titulo}">
+			<input id="dialogTitulo" class="border p-2 w-full" placeholder="TÃ­tulo" value="${titulo}">
 			<input id="dialogRuta" class="border p-2 w-full" placeholder="Ruta imagen" value="${ruta}">
-			<input id="dialogDescripcion" class="border p-2 w-full" placeholder="Descripción" value="${descripcion}">
-			<input id="dialogCaracteristicas" class="border p-2 w-full" placeholder="Características separadas por coma" value="${caracteristicas}">
+			<input id="dialogDescripcion" class="border p-2 w-full" placeholder="DescripciÃ³n" value="${descripcion}">
+			<input id="dialogCaracteristicas" class="border p-2 w-full" placeholder="CaracterÃ­sticas separadas por coma" value="${caracteristicas}">
 
 			<div class="flex gap-2">
 				<button type="submit" class="px-4 py-2 bg-purple-700 text-white rounded">Guardar</button>
@@ -421,10 +421,10 @@ const abrirFormularioFoto = (tituloDialogo, fotoActual, callbackAceptar) => {
 		};
 
 		if (nuevaFoto.title === '' || nuevaFoto.foto === '' || nuevaFoto.descripcion === '') {
-			abrirMensajeDialogo('Título, ruta y descripción son obligatorios.');
+			abrirMensajeDialogo('TÃ­tulo, ruta y descripciÃ³n son obligatorios.');
 		} else {
 			if (nuevaFoto.caracteristicas.length === 0) {
-				nuevaFoto.caracteristicas = ['Sin características'];
+				nuevaFoto.caracteristicas = ['Sin caracterÃ­sticas'];
 			}
 
 			callbackAceptar(nuevaFoto);
@@ -440,7 +440,7 @@ const abrirFormularioFoto = (tituloDialogo, fotoActual, callbackAceptar) => {
 };
 
 
-// Formulario pequeño para buscar por título
+// Formulario pequeÃ±o para buscar por tÃ­tulo
 const abrirBuscarDialogo = (tituloDialogo, callbackAceptar) => {
 	const dialog = document.createElement('dialog');
 
@@ -449,10 +449,10 @@ const abrirBuscarDialogo = (tituloDialogo, callbackAceptar) => {
 			<h2 class="font-bold text-lg">${tituloDialogo}</h2>
 
 			<p class="text-sm text-gray-600">
-				Utiliza el mismo título que aparece en la lista lateral.
+				Utiliza el mismo tÃ­tulo que aparece en la lista lateral.
 			</p>
 
-			<input id="dialogBuscarTitulo" class="border p-2 w-full" placeholder="Título de la foto">
+			<input id="dialogBuscarTitulo" class="border p-2 w-full" placeholder="TÃ­tulo de la foto">
 
 			<div class="flex gap-2">
 				<button type="submit" class="px-4 py-2 bg-purple-700 text-white rounded">Buscar</button>
@@ -470,7 +470,7 @@ const abrirBuscarDialogo = (tituloDialogo, callbackAceptar) => {
 		const titulo = document.getElementById('dialogBuscarTitulo').value.trim();
 
 		if (titulo === '') {
-			abrirMensajeDialogo('Debes escribir un título.');
+			abrirMensajeDialogo('Debes escribir un tÃ­tulo.');
 		} else {
 			callbackAceptar(titulo);
 			dialog.close();
@@ -518,7 +518,7 @@ function mostrarFoto() {
 			refrescarGaleria(indice);
 			abrirMensajeDialogo('Foto encontrada y mostrada.');
 		} else {
-			abrirMensajeDialogo('No existe una foto con ese título.');
+			abrirMensajeDialogo('No existe una foto con ese tÃ­tulo.');
 		}
 	});
 }
@@ -544,11 +544,11 @@ function modificarFoto() {
 					refrescarGaleria(indice);
 					abrirMensajeDialogo('Foto modificada correctamente.');
 				} else {
-					abrirMensajeDialogo('No se puede modificar: ese título ya existe.');
+					abrirMensajeDialogo('No se puede modificar: ese tÃ­tulo ya existe.');
 				}
 			});
 		} else {
-			abrirMensajeDialogo('No existe una foto con ese título.');
+			abrirMensajeDialogo('No existe una foto con ese tÃ­tulo.');
 		}
 	});
 }
@@ -560,13 +560,13 @@ function eliminarFoto() {
 		const indice = buscarFotoPorNombre(tituloBuscado);
 
 		if (indice !== -1) {
-			abrirConfirmacionDialogo(`¿Seguro que quieres eliminar "${images[indice].title}"?`, () => {
+			abrirConfirmacionDialogo(`Â¿Seguro que quieres eliminar "${images[indice].title}"?`, () => {
 				images.splice(indice, 1);
 				refrescarGaleria(indice);
 				abrirMensajeDialogo('Foto eliminada correctamente.');
 			});
 		} else {
-			abrirMensajeDialogo('No existe una foto con ese título.');
+			abrirMensajeDialogo('No existe una foto con ese tÃ­tulo.');
 		}
 	});
 }
@@ -580,7 +580,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const openSidebarBtn = document.getElementById('openSidebarBtn');
 	const closeSidebarBtn = document.getElementById('closeSidebarBtn');
 
-	// Pintado inicial al cargar la página.
+	// Pintado inicial al cargar la pÃ¡gina.
 	refrescarGaleria(currentIndex);
 
 	if (btnAgregar) {
@@ -607,7 +607,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	if (autoplayBtnMobile) {
-		// Mismo control de autoplay en botón móvil.
+		// Mismo control de autoplay en botÃ³n mÃ³vil.
 		autoplayBtnMobile.addEventListener('click', () => {
 			setAutoplayState(!autoplay);
 		});
@@ -619,7 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				currentIndex = (currentIndex - 1 + images.length) % images.length;
 				refrescarGaleria(currentIndex);
 			} else {
-				alert('No hay imágenes para navegar.');
+				alert('No hay imÃ¡genes para navegar.');
 			}
 		});
 	}
@@ -630,23 +630,23 @@ document.addEventListener('DOMContentLoaded', () => {
 				currentIndex = (currentIndex + 1) % images.length;
 				refrescarGaleria(currentIndex);
 			} else {
-				alert('No hay imágenes para navegar.');
+				alert('No hay imÃ¡genes para navegar.');
 			}
 		});
 	}
 
 	if (sidebarMenu && openSidebarBtn && closeSidebarBtn) {
-		// Apertura manual del sidebar en móvil.
+		// Apertura manual del sidebar en mÃ³vil.
 		openSidebarBtn.addEventListener('click', () => {
 			sidebarMenu.classList.remove('-translate-x-full');
 		});
 
-		// Cierre manual del sidebar en móvil.
+		// Cierre manual del sidebar en mÃ³vil.
 		closeSidebarBtn.addEventListener('click', () => {
 			sidebarMenu.classList.add('-translate-x-full');
 		});
 
-		// Cierra al pulsar fuera del panel en pantallas pequeñas.
+		// Cierra al pulsar fuera del panel en pantallas pequeÃ±as.
 		document.addEventListener('click', (e) => {
 			if (window.innerWidth < 1024 && !sidebarMenu.contains(e.target) && !openSidebarBtn.contains(e.target)) {
 				sidebarMenu.classList.add('-translate-x-full');
